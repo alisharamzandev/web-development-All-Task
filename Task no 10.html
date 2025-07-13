@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Grade Manager</title>
+  <style>
+    .low-grade {
+      background-color: #f8d7da; /* light red */
+    }
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Student Grade Manager</h2>
+
+  <input type="text" id="studentName" placeholder="Enter Name" />
+  <input type="number" id="studentMarks" placeholder="Enter Marks" />
+  <button onclick="addStudent()">Add Student</button>
+
+  <h3>Student List</h3>
+  <table id="studentTable">
+    <tr>
+      <th>Name</th>
+      <th>Marks</th>
+      <th>Action</th>
+    </tr>
+  </table>
+
+  <h3 id="averageDisplay">Average: 0</h3>
+
+  <script>
+    let students = [];
+
+function addStudent() {
+  const nameInput = document.getElementById("studentName");
+  const marksInput = document.getElementById("studentMarks");
+
+  const name = nameInput.value.trim();
+  const marks = parseInt(marksInput.value);
+
+  if (name === "" || isNaN(marks)) {
+    alert("Please enter both name and valid marks.");
+    return;
+  }
+
+  const student = { name, marks };
+  students.push(student);
+
+  nameInput.value = "";
+  marksInput.value = "";
+
+  displayStudents();
+  calculateAverage();
+}
+
+function displayStudents() {
+  const table = document.getElementById("studentTable");
+  
+  // Clear all rows except the header
+  table.innerHTML = `
+    <tr>
+      <th>Name</th>
+      <th>Marks</th>
+      <th>Action</th>
+    </tr>
+  `;
+
+  students.forEach((student, index) => {
+    const row = table.insertRow();
+
+    if (student.marks < 40) {
+      row.classList.add("low-grade");
+    }
+
+    const nameCell = row.insertCell(0);
+    const marksCell = row.insertCell(1);
+    const actionCell = row.insertCell(2);
+
+    nameCell.textContent = student.name;
+    marksCell.textContent = student.marks;
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.onclick = function () {
+      deleteStudent(index);
+    };
+
+    actionCell.appendChild(deleteBtn);
+  });
+}
+
+function deleteStudent(index) {
+  students.splice(index, 1);
+  displayStudents();
+  calculateAverage();
+}
+
+function calculateAverage() {
+  if (students.length === 0) {
+    document.getElementById("averageDisplay").textContent = "Average: 0";
+    return;
+  }
+
+  const total = students.reduce((sum, s) => sum + s.marks, 0);
+  const avg = total / students.length;
+
+  document.getElementById("averageDisplay").textContent = Average: ${avg.toFixed(2)};
+}
+  </script>
+</body>
+</html>
