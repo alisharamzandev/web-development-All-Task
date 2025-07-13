@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str = "how are you";
+let result = str.charAt(0).toUpperCase() + str.slice(1);
+console.log(result); // Output: How are you
+
+let name = "HelloWorld";
+// Remove first character
+let Output = str.slice(1);
+console.log(Output); // Output: elloWorld
+
+
+let str3 = "code";
+for (let char of str3) {
+  console.log(char);
+}
+// Output: c o d e (each on new line)
+
+function getLastNChars(str, n) {
+  return str.slice(-n);
+}
+
+console.log(getLastNChars("developer", 4)); // Output: oper
+
+let sentence = "JavaScript is fun to learn";
+let words = sentence.trim().split(" ");
+console.log(words.length); // Output: 5
+    </script>
+</body>
+</html>
