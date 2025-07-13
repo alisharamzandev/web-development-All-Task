@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fish Weight Check</title>
+</head>
+<body>
+  <h2>🐟 Fish Weight Check</h2>
+
+  <!-- Result yahaan dikhega -->
+  <p id="output">Result will appear here...</p>
+
+  <script>
+    // Ye function fish ka weight check karta hai
+    function checkFishWeight(weight, minWeight, callback) {
+
+      // Thoda delay daal rahe hain jaise weighing machine waqt leti ho
+      setTimeout(function() {
+
+        // Agar fish ka weight required se zyada ya barabar hai to "Pass"
+        if (weight >= minWeight) {
+          callback("Pass");
+        } else {
+          // Nahi to "Fail"
+          callback("Fail");
+        }
+
+      }, 2000); // 2000 milliseconds = 2 seconds delay
+    }
+
+    // Ye function result ko screen par show karta hai
+    function scoringCallback(result) {
+      document.getElementById("output").textContent = "Result of check: " + result;
+    }
+
+    // Function ko call kar rahe hain example values ke saath
+    // Tum chaaho to yeh values change bhi kar sakti ho
+    checkFishWeight(4.5, 3.0, scoringCallback);
+  </script>
+</body>
+</html>
